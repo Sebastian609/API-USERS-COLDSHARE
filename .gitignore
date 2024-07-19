@@ -49,4 +49,3 @@ Thumbs.db
 *.wmv
 
 #database config
-/src/db.ts
