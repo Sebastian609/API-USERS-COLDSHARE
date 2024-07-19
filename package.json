@@ -1,5 +1,5 @@
 {
-  "name": "florever_backend",
+  "name": "coldshare-api-users",
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Viverco@bitbucket.org/viverco/florever_backend.git"
+    "url": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/viverco/florever_backend#readme",
+  "homepage": "",
   "dependencies": {
     "axios": "^1.7.2",
     "cors": "^2.8.5",
