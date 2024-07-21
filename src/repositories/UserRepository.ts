@@ -2,7 +2,7 @@
 import { Database } from "../Database";
 import { User } from "../models/User";
 
-import { authUserQuery, createUserQuery, getAllUser, updateUser } from "../queries/userQueries";
+import { authUserQuery, createUserQuery, findUser, getAllUser, updateUser } from "../queries/userQueries";
 
 export class UserRepository {
   async auth(username: string, password: string): Promise<User> {
@@ -34,6 +34,24 @@ export class UserRepository {
       }
 
       const user = result as User[];
+  
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async find(id:number): Promise<User> {
+    try {
+
+      const [result] = await Database.select(findUser,[id]);
+
+      
+      if (!result)  {
+        throw new Error("no se puedo objtener");
+      }
+
+      const user = result[0] as User;
   
       return user;
     } catch (error) {

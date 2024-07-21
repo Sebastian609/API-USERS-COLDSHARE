@@ -27,6 +27,15 @@ class UserService {
     }
   }
 
+  async find(id:number) {
+    try {
+      const users = await this.userRepository.find(id);
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async save(user: User): Promise<boolean> {
     try {
       const response = await this.userRepository.save(user);
