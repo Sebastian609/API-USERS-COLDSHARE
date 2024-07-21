@@ -15,7 +15,7 @@ tu.password  as password,
 tu.admin  as isAdmin
 from tbl_users tu 
 where tu.password like ? and tu.username like ?
-
+and tu.is_active = 1
 `
 export const updateUser = `
 UPDATE tbl_users
