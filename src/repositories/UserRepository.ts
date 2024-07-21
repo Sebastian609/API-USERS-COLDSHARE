@@ -47,7 +47,7 @@ export class UserRepository {
       const [result] = await Database.select(findUser,[id]);
 
       
-      if (!result)  {
+      if (!result || result.length===0)  {
         throw new Error("no se puedo objtener");
       }
 
