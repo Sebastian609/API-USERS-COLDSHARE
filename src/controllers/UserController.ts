@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import UserService from "../service/UserService";
 
-import { logingDto } from "../models/loginDto";
+import { logingDto } from "../models/LoginDto";
 import { User } from "../models/UserDTO";
 
 export class UserController {
