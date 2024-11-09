@@ -1,5 +1,4 @@
-
-import { User } from "../models/UserDTO";
+import { UserDTO } from "../models/UserDTO";  // Asegúrate de importar UserDTO
 import { UserRepository } from "../repositories/UserRepository";
 
 class UserService {
@@ -9,16 +8,7 @@ class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async auth(username: string, password: string) {
-    try {
-      const user = await this.userRepository.auth(username, password);
-      return user;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getAll() {
+  async getAll(): Promise<UserDTO[]> {  // Aquí se utiliza UserDTO
     try {
       const users = await this.userRepository.getAll();
       return users;
@@ -27,16 +17,16 @@ class UserService {
     }
   }
 
-  async find(id:number) {
+  async find(id: number): Promise<UserDTO> {  // Aquí también se utiliza UserDTO
     try {
-      const users = await this.userRepository.find(id);
-      return users;
+      const user = await this.userRepository.find(id);  // Cambié users por user
+      return user;
     } catch (error) {
       throw error;
     }
   }
 
-  async save(user: User): Promise<boolean> {
+  /*async save(user: UserDTO): Promise<boolean> {  // Descomenta y usa UserDTO en lugar de User
     try {
       const response = await this.userRepository.save(user);
       return response;
@@ -45,14 +35,14 @@ class UserService {
     }
   }
 
-  async update(user: User): Promise<boolean> {
+  async update(user: UserDTO): Promise<boolean> {  // Lo mismo para el update
     try {
       const response = await this.userRepository.update(user);
       return response;
     } catch (error) {
       throw error;
     }
-  }
+  }*/
 }
 
 export default UserService;
