@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import UserService from "../service/UserService";
 
 import { logingDto } from "../models/loginDto";
-import { User } from "../models/User";
+import { User } from "../models/UserDTO";
 
 export class UserController {
   private userService: UserService;
