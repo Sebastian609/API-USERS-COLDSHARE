@@ -1,6 +1,6 @@
 
 import { Database } from "../Database";
-import { User } from "../models/User";
+import { User } from "../models/UserDTO";
 
 import { authUserQuery, createUserQuery, findUser, getAllUser, updateUser } from "../queries/userQueries";
 
