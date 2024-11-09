@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 
 import UserService from "../service/UserService";
-
-import { UserDTO } from "../models/UserDTO";
 import {LoginDto} from "../models/LoginDto";
 
 
