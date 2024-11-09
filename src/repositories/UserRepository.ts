@@ -1,6 +1,7 @@
 import { Database } from "../Database";
 import { UserDTO } from "../models/UserDTO";
-import { getAllUsersQuery, findUserQuery } from "../queries/UserQueries";
+import {getAllUsersQuery, findUserQuery, auth} from "../queries/UserQueries";
+import {LoginDto} from "../models/LoginDto";
 
 export class UserRepository {
   async getAll(): Promise<UserDTO[]> {
@@ -20,6 +21,21 @@ export class UserRepository {
   async find(id: number): Promise<UserDTO> {
     try {
       const [result] = await Database.select(findUserQuery, [id]);
+
+      if (!result || result.length === 0) {
+        throw new Error("No se pudo obtener el usuario");
+      }
+
+      return result[0] as UserDTO;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByPasswordAndDNI(login: LoginDto): Promise<UserDTO> {
+    try {
+      const values = [login.username, login.password]
+      const [result] = await Database.select(auth, [values]);
 
       if (!result || result.length === 0) {
         throw new Error("No se pudo obtener el usuario");

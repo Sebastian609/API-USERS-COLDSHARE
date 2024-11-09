@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
 import UserService from "../service/UserService";
-
-import { logingDto } from "../models/LoginDto";
 import { UserDTO } from "../models/UserDTO";
+import {LoginDto} from "../models/LoginDto";
+
 
 export class UserController {
   private userService: UserService;
@@ -14,17 +14,14 @@ export class UserController {
 /*
   async onAuth(req: Request, res: Response): Promise<Response> {
     try {
-      const loginData = req.body as logingDto;
-
+      const loginData = req.body as LoginDto;
+      console.log(loginData)
       if (!loginData) {
         return res
           .status(400)
           .json({ message: "Los datos recibidos son nulos" });
       }
-      const response = await this.userService.auth(
-        loginData.username,
-        loginData.password
-      );
+      const response = await this.userService.auth(loginData);
       return res.json(response);
     } catch (error: any) {
       return res.status(500).json({ message: error.message });
@@ -40,7 +37,7 @@ export class UserController {
     }
   }
 
-  async onSave(req: Request, res: Response): Promise<Response> {
+  /*async onSave(req: Request, res: Response): Promise<Response> {
     try {
       const user: UserDTO = req.body as UserDTO;
 
@@ -70,7 +67,7 @@ export class UserController {
     } catch (error: any) {
       return res.status(500).json({ message: error.message });
     }
-  }
+  }*/
 
   async onFind(req: Request, res: Response): Promise<Response> {
     try {
@@ -81,6 +78,6 @@ export class UserController {
       return res.status(500).json({ message: error.message });
     }
   }
-    */
+    
 }
 
