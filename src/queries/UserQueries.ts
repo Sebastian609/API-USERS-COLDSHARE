@@ -48,3 +48,16 @@ SELECT
 FROM tbl_usuarios
 WHERE usuario_id = ?;
 `;
+
+export const auth =  `
+    select usuario_id     as usuarioId,
+           vecindario_id  as vecindarioId,
+           rol_id         as rolId,
+           nombre,
+           dni,
+           estado,
+           fecha_creacion as fechaCreacion
+    from tbl_usuarios
+    where dni like "12345678"
+      and password LIKE "pass1"
+`
