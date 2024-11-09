@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import UserService from "../service/UserService";
+
 import {LoginDto} from "../models/LoginDto";
 
 
@@ -10,7 +11,7 @@ export class UserController {
   constructor() {
     this.userService = new UserService();
   }
-
+/*
   async onAuth(req: Request, res: Response): Promise<Response> {
     try {
       const loginData = req.body as LoginDto;
@@ -38,7 +39,7 @@ export class UserController {
 
   /*async onSave(req: Request, res: Response): Promise<Response> {
     try {
-      const user: User = req.body as User;
+      const user: UserDTO = req.body as UserDTO;
 
       if (!user) {
         return res
@@ -54,7 +55,7 @@ export class UserController {
 
   async onUpdate(req: Request, res: Response): Promise<Response> {
     try {
-      const user: User = req.body as User;
+      const user: UserDTO = req.body as UserDTO;
 
       if (!user) {
         return res
@@ -77,4 +78,6 @@ export class UserController {
       return res.status(500).json({ message: error.message });
     }
   }
+    
 }
+

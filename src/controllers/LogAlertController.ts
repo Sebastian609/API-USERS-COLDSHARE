@@ -3,6 +3,7 @@ import LogAlertService from "../service/LogAlertService";
 import { AlertLogDTO } from "../models/AlertLogDTO";
 
 export class LogAlertController {
+/*
     private logAlertService: LogAlertService;
 
     constructor() {
@@ -27,4 +28,5 @@ export class LogAlertController {
             return res.status(500).json({ message: error.message });
         }
     }
+        */
 }
