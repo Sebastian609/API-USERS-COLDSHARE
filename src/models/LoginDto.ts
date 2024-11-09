@@ -1,4 +1,4 @@
-export interface logingDto {
+export interface LoginDto {
     password: string,
     username: string,
 }

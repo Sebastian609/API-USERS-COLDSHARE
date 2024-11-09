@@ -1,5 +1,6 @@
 import { UserDTO } from "../models/UserDTO";  // Asegúrate de importar UserDTO
 import { UserRepository } from "../repositories/UserRepository";
+import {LoginDto} from "../models/LoginDto";
 
 class UserService {
   private userRepository: UserRepository;
@@ -43,6 +44,16 @@ class UserService {
       throw error;
     }
   }*/
+
+
+  async auth(login: LoginDto): Promise<UserDTO> {  // Lo mismo para el update
+    try {
+      const response = await this.userRepository.findByPasswordAndDNI(login);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default UserService;
