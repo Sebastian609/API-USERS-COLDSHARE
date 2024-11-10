@@ -1,33 +1,42 @@
-import { Database } from "../Database";
 import { AlertLogDTO } from "../models/AlertLogDTO";
-import { getAllLogAlertsQuery, findLogAlertQuery } from "../queries/AlertLogQueries";
+import { Database } from "../Database"; // Tu clase Database
+import {
+  createLogAlertQuery,
+  getAllLogAlertsQuery,
+  findLogAlertQuery
+} from "../queries/AlertLogQueries";
 
 export class AlertLogRepository {
-    async getAll(): Promise<AlertLogDTO[]> {
-        try {
-            const [result] = await Database.select(getAllLogAlertsQuery);
-
-            if (!result) {
-                throw new Error("No se pudieron obtener las alertas");
-            }
-
-            return result as AlertLogDTO[];
-        } catch (error) {
-            throw error;
-        }
+  // Método para insertar una alerta en la base de datos
+  async create(alertLog: AlertLogDTO): Promise<void> {
+    const { latitud, longitud } = alertLog;
+    try {
+      await Database.executeInsert(createLogAlertQuery, [latitud, longitud]);
+    } catch (error) {
+      console.error("Error al insertar la alerta:", error);
+      throw error;
     }
+  }
 
-    async find(id: number): Promise<AlertLogDTO> {
-        try {
-            const [result] = await Database.select(findLogAlertQuery, [id]);
-
-            if (!result || result.length === 0) {
-                throw new Error("No se pudo obtener la alerta");
-            }
-
-            return result[0] as AlertLogDTO;
-        } catch (error) {
-            throw error;
-        }
+  // Método para obtener todas las alertas
+  async getAll(): Promise<AlertLogDTO[]> {
+    try {
+      const result = await Database.executeSelect(getAllLogAlertsQuery);
+      return result as AlertLogDTO[];
+    } catch (error) {
+      console.error("Error al obtener todas las alertas:", error);
+      throw error;
     }
+  }
+
+  // Método para buscar una alerta por ID
+  async find(id: number): Promise<AlertLogDTO | null> {
+    try {
+      const result = await Database.executeSelect(findLogAlertQuery, [id]);
+      return result.length > 0 ? (result[0] as AlertLogDTO) : null;
+    } catch (error) {
+      console.error(`Error al buscar la alerta con ID ${id}:`, error);
+      throw error;
+    }
+  }
 }

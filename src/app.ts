@@ -5,6 +5,7 @@ import NeighborhoodRoutes from "./routes/NeighborhoodRoutes";
 import router from './routes/user.routes';
 import routerreports from './routes/Reports.routes';
 import routercomments from './routes/Comentarios.routes';
+import alertrouter from './routes/AlertsLog.routes';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/api/streak",streakRoutes);
 app.use("/api/reports",routerreports);
 app.use("/api/comentarios",routercomments)
 app.use("/api/neighborhoods", NeighborhoodRoutes);
+app.use("/api/alerts", alertrouter);
 app.listen(3023, () => {
   console.log("Server running on port 3023");
 });
