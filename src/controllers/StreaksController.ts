@@ -20,7 +20,7 @@ export class StreaksController {
         message: 'Racha actualizada correctamente',
         data: updatedStreak
       });
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error al actualizar la racha:', error);
       return res.status(500).json({
         success: false,
@@ -41,7 +41,7 @@ export class StreaksController {
         message: 'Racha obtenida correctamente',
         data: streak
       });
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error al obtener la racha:', error);
       return res.status(500).json({
         success: false,
