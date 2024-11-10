@@ -17,4 +17,7 @@ routerreports.post('/', reportController.onCreate.bind(reportController));
 // Ruta para actualizar un reporte
 routerreports.put('/', reportController.onUpdate.bind(reportController));
 
+// Ruta para buscar reportes por vecindario
+routerreports.get('/vecindario/:vecindario_id', reportController.onFindByVecindario.bind(reportController));
+
 export default routerreports;

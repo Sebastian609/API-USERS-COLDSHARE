@@ -16,7 +16,7 @@ WHERE vecindario_id = ?;
 `;
 
 export const getAllNeighborhoodsQuery = `
-SELECT 
+SELECT  
     vecindario_id as vecindarioId,
     nombre,
     direccion,
