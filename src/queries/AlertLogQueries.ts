@@ -1,7 +1,7 @@
 export const createLogAlertQuery = `
 INSERT INTO tbl_log_alertas
-(latitud, longitud, fecha_creacion)
-VALUES (?, ?, ?);
+(latitud, longitud)
+VALUES (?, ?);
 `;
 
 export const getAllLogAlertsQuery = `
