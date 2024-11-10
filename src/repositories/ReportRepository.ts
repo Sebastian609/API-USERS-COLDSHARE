@@ -1,33 +1,75 @@
 import { Database } from "../Database";
 import { ReportDTO } from "../models/ReportDTO";
-import { getAllReportsQuery, findReportQuery } from "../queries/ReportQueries";
+import { createReportQuery, updateReportQuery, getAllReportsQuery, findReportQuery } from "../queries/ReportQueries";
 
 export class ReportRepository {
-    async getAll(): Promise<ReportDTO[]> {
-        try {
-            const [result] = await Database.select(getAllReportsQuery);
+  // Obtener todos los reportes
+  async getAll(): Promise<ReportDTO[]> {
+    try {
+      const [result] = await Database.select(getAllReportsQuery);
 
-            if (!result) {
-                throw new Error("No se pudieron obtener los reportes");
-            }
+      if (!result || result.length === 0) {
+        throw new Error("No se pudieron obtener los reportes");
+      }
 
-            return result as ReportDTO[];
-        } catch (error) {
-            throw error;
-        }
+      return result as ReportDTO[];
+    } catch (error) {
+      throw error;
     }
+  }
 
-    async find(id: number): Promise<ReportDTO> {
-        try {
-            const [result] = await Database.select(findReportQuery, [id]);
+  // Obtener un reporte por su ID
+  async find(id: number): Promise<ReportDTO> {
+    try {
+      const [result] = await Database.select(findReportQuery, [id]);
 
-            if (!result || result.length === 0) {
-                throw new Error("No se pudo obtener el reporte");
-            }
+      if (!result || result.length === 0) {
+        throw new Error("No se pudo obtener el reporte");
+      }
 
-            return result[0] as ReportDTO;
-        } catch (error) {
-            throw error;
-        }
+      return result[0] as ReportDTO;
+    } catch (error) {
+      throw error;
     }
+  }
+
+  // Insertar un nuevo reporte
+  async create(report: ReportDTO): Promise<any> {
+    try {
+      const values = [
+        report.usuarioId, 
+        report.titulo, 
+        report.cuerpo, 
+        report.latitud, 
+        report.longitud, 
+        report.estado, 
+        report.fechaCreacion
+      ];
+
+      const result = await Database.executeInsert(createReportQuery, values);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Actualizar un reporte existente
+  async update(report: ReportDTO): Promise<any> {
+    try {
+      const values = [
+        report.usuarioId, 
+        report.titulo, 
+        report.cuerpo, 
+        report.latitud, 
+        report.longitud, 
+        report.estado,
+        report.reporteId
+      ];
+
+      const result = await Database.executeInsert(updateReportQuery, values);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
