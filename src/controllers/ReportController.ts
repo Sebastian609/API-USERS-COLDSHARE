@@ -52,4 +52,12 @@ export class ReportController {
             return res.status(500).json({ message: error.message });  // En caso de error, enviar mensaje de error
         }
     }
-}
+    async onFindByVecindario(req: Request, res: Response): Promise<Response> {
+        try {
+            const vecindarioId: number = parseInt(req.params.vecindario_id);  // Obtener el vecindario_id de los parámetros de la URL
+            const result = await this.reportService.findByVecindario(vecindarioId);  // Llamar al servicio con vecindario_id
+            return res.status(200).json(result);  // Enviar el resultado de la búsqueda
+        } catch (error: any) {
+            return res.status(500).json({ message: error.message });  // En caso de error, enviar mensaje de error
+        }
+}}

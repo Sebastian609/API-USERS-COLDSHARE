@@ -1,7 +1,7 @@
 export const createCommentQuery = `
 INSERT INTO tbl_comentarios
-(reporte_id, usuario_id, cuerpo, estado, fecha_creacion)
-VALUES (?, ?, ?, ?, ?);
+(reporte_id, usuario_id, cuerpo)
+VALUES (?, ?, ?);
 `;
 
 export const updateCommentQuery = `
@@ -31,4 +31,15 @@ SELECT
     fecha_creacion as fechaCreacion
 FROM tbl_comentarios
 WHERE comentarios_id = ?;
+`;
+export const findCommentQueryByReporte = `
+SELECT 
+    comentarios_id as comentariosId,
+    reporte_id as reporteId,
+    usuario_id as usuarioId,
+    cuerpo,
+    estado,
+    fecha_creacion as fechaCreacion
+FROM tbl_comentarios
+WHERE reporte_id = ?;
 `;

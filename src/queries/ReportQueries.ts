@@ -1,7 +1,7 @@
 export const createReportQuery = `
 INSERT INTO tbl_reportes
-(usuario_id, titulo, cuerpo, latitud, longitud, estado, fecha_creacion)
-VALUES (?, ?, ?, ?, ?, ?, ?);
+(usuario_id, titulo, cuerpo, latitud, longitud)
+VALUES (?, ?, ?, ?, ?);
 `;
 
 export const updateReportQuery = `
@@ -35,4 +35,17 @@ SELECT
     fecha_creacion as fechaCreacion
 FROM tbl_reportes
 WHERE reporte_id = ?;
+`;
+export const findReportQuerybyVecindario=
+`SELECT r.reporte_id AS reporteId,
+    r.usuario_id AS usuarioId,
+    r.titulo,
+    r.cuerpo,
+    r.latitud,
+    r.longitud,
+    r.estado,
+    r.fecha_creacion AS fechaCreacion
+FROM tbl_reportes r
+JOIN tbl_usuarios u ON r.usuario_id = u.usuario_id
+WHERE u.vecindario_id = ?;
 `;
