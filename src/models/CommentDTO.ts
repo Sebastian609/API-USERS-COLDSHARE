@@ -6,5 +6,6 @@ export interface CommentDTO {
     usuarioId: number;
     cuerpo: string;
     estado: number;
+    nombreUsuario?:string;
     fechaCreacion: Date;
 }

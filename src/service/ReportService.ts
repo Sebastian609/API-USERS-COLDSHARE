@@ -1,12 +1,20 @@
 // services/ReportService.ts
+import { CommentDTO } from "../models/CommentDTO";
 import { ReportDTO } from "../models/ReportDTO";
+import { UserDTO } from "../models/UserDTO";
+import { CommentRepository } from "../repositories/CommentRepository";
 import { ReportRepository } from "../repositories/ReportRepository";
+import { UserRepository } from "../repositories/UserRepository";
 
 class ReportService {
     private reportRepository: ReportRepository;
+    private userRepository: UserRepository;
+    private commentarioRepository : CommentRepository;
 
     constructor() {
         this.reportRepository = new ReportRepository(); // Inicialización del repositorio de reportes
+        this.userRepository = new UserRepository();
+        this.commentarioRepository = new CommentRepository()
     }
 
     // Método para obtener todos los reportes
@@ -59,7 +67,27 @@ class ReportService {
     async findByVecindario(vecindarioId: number): Promise<ReportDTO[]> {
         try {
             const reports = await this.reportRepository.findByVecindario(vecindarioId);
-            return reports;
+            const userReports = reports.map(async (report:ReportDTO)=>{
+                const usuario:UserDTO  = await this.userRepository.find(report.usuarioId)
+                const comments: CommentDTO[] = await this.commentarioRepository.findByReporteId(report.usuarioId)
+                
+                const commentsUser = comments.map( async (comment: CommentDTO)=>{
+                    const userComment = await  this.userRepository.find(comment.usuarioId)
+                    const newComment = comment
+                    newComment.nombreUsuario = userComment.nombre
+                    return newComment
+                })
+
+                
+                const com = await Promise.all(commentsUser)
+                report.comments = com
+                report.usuario = usuario
+
+                return report
+            })
+            const data =  Promise.all(userReports);
+            
+            return data
         } catch (error) {
             throw error;
         }

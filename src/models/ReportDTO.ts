@@ -1,3 +1,6 @@
+import { CommentDTO } from "./CommentDTO";
+import { UserDTO } from "./UserDTO";
+
 export interface ReportDTO {
     reporteId: number;
     usuarioId: number;
@@ -7,4 +10,7 @@ export interface ReportDTO {
     longitud: number;
     estado: number;
     fechaCreacion: Date;
+    usuario?: UserDTO
+    comments?:CommentDTO[]
 }
+    
