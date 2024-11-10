@@ -1,7 +1,7 @@
 export const createReportQuery = `
 INSERT INTO tbl_reportes
-(usuario_id, titulo, cuerpo, latitud, longitud, estado, fecha_creacion)
-VALUES (?, ?, ?, ?, ?, ?, ?);
+(usuario_id, titulo, cuerpo, latitud, longitud)
+VALUES (?, ?, ?, ?, ?);
 `;
 
 export const updateReportQuery = `

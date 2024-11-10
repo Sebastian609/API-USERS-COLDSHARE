@@ -49,20 +49,19 @@ export class ReportRepository {
     }
 }
     // Insertar un nuevo reporte
-  async create(report: ReportDTO): Promise<any> {
+  async create(report: ReportDTO): Promise<boolean> {
     try {
       const values = [
         report.usuarioId, 
         report.titulo, 
         report.cuerpo, 
         report.latitud, 
-        report.longitud, 
-        report.estado, 
-        report.fechaCreacion
+        report.longitud
       ];
 
       const result = await Database.executeInsert(createReportQuery, values);
-      return result;
+      return true;
+      console.log("logrado reporte")
     } catch (error) {
       throw error;
     }

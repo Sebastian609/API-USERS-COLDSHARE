@@ -11,10 +11,10 @@ export class StreaksController {
 
   // Método para actualizar la racha de un usuario
   async updateStreak(req: Request, res: Response): Promise<Response> {
-    const userId = parseInt(req.params.userId);
+    const userId = req.body.userId as number;
 
     try {
-      const updatedStreak: StreaksDTO = await this.streaksService.updateStreak(userId);
+      const updatedStreak: boolean = await this.streaksService.updateStreak(userId);
       return res.status(200).json({
         success: true,
         message: 'Racha actualizada correctamente',
