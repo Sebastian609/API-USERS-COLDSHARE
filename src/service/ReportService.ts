@@ -69,20 +69,19 @@ class ReportService {
             const reports = await this.reportRepository.findByVecindario(vecindarioId);
             const userReports = reports.map(async (report:ReportDTO)=>{
                 const usuario:UserDTO  = await this.userRepository.find(report.usuarioId)
-                const comments: CommentDTO[] = await this.commentarioRepository.findByReporteId(report.usuarioId)
-                
-                const commentsUser = comments.map( async (comment: CommentDTO)=>{
-                    const userComment = await  this.userRepository.find(comment.usuarioId)
-                    const newComment = comment
-                    newComment.nombreUsuario = userComment.nombre
-                    return newComment
-                })
-
-                
-                const com = await Promise.all(commentsUser)
-                report.comments = com
                 report.usuario = usuario
 
+     
+                    let  comments = await this.commentarioRepository.findByReporteId(report.reporteId);
+                    const newCommets = comments.map( async (comment: CommentDTO)=>{
+                        let usu = await this.userRepository.find(comment.usuarioId)
+                        let newComment = comment
+                        newComment.nombreUsuario = usu.nombre
+
+                        return newComment
+                    })
+
+                    report.comments = await Promise.all(newCommets)
                 return report
             })
             const data =  Promise.all(userReports);

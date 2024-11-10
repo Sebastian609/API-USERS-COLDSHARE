@@ -45,8 +45,11 @@ export class CommentRepository {
     async findByReporteId(reporte_id: number): Promise<CommentDTO[]> {
         try {
             const [result] = await Database.select(findCommentQueryByReporte, [reporte_id]);
+            if(result.length === 0){
+                return []
+            }
 
-            if (!result || result.length === 0) {
+            if (!result) {
                 throw new Error("No se encontraron comentarios para este reporte");
             }
 

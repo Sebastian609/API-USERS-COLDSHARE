@@ -20,7 +20,8 @@ SELECT
     longitud,
     estado,
     fecha_creacion as fechaCreacion
-FROM tbl_reportes;
+FROM tbl_reportes
+ORDER BY fecha_creacion DESC;
 `;
 
 export const findReportQuery = `
