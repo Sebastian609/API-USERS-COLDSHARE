@@ -4,6 +4,11 @@ INSERT INTO tbl_vecindario
 VALUES (?, ?, ?, ?);
 `;
 
+export const deleteNeighborhoodQuery = `
+DELETE FROM tbl_vecindario
+WHERE vecindario_id = ?;
+`;
+
 export const updateNeighborhoodQuery = `
 UPDATE tbl_vecindario
 SET nombre = ?, direccion = ?, estado = ?
