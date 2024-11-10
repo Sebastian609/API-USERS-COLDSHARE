@@ -50,14 +50,15 @@ WHERE usuario_id = ?;
 `;
 
 export const auth =  `
-    select usuario_id     as usuarioId,
-           vecindario_id  as vecindarioId,
-           rol_id         as rolId,
-           nombre,
-           dni,
-           estado,
-           fecha_creacion as fechaCreacion
-    from tbl_usuarios
-    where dni like "12345678"
-      and password LIKE "pass1"
+SELECT 
+    usuario_id AS usuarioId,
+    vecindario_id AS vecindarioId,
+    rol_id AS rolId,
+    nombre,
+    dni,
+    estado,
+    fecha_creacion AS fechaCreacion
+FROM tbl_usuarios
+    WHERE password LIKE ?
+    AND dni LIKE ?;
 `

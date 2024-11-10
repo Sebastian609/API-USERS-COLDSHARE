@@ -15,7 +15,6 @@ export class UserController {
   async onAuth(req: Request, res: Response): Promise<Response> {
     try {
       const loginData = req.body as LoginDto;
-      console.log(loginData)
       if (!loginData) {
         return res
           .status(400)
