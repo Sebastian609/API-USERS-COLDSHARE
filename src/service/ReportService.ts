@@ -56,6 +56,14 @@ class ReportService {
             throw error;  // Lanzar el error para manejarlo en el controlador
         }
     }
+    async findByVecindario(vecindarioId: number): Promise<ReportDTO[]> {
+        try {
+            const reports = await this.reportRepository.findByVecindario(vecindarioId);
+            return reports;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default ReportService;
