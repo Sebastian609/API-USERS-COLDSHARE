@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';  // Importa mysql2 en modo promesa
+import mysql from 'mysql2/promise';
 import { dbConfig } from './db';
 
 export class Database {
@@ -128,4 +128,25 @@ export class Database {
       if (!connection) conn.release();
     }
   }
+
+  static async executeDelete(sql: string, values: any[], connection?: mysql.PoolConnection): Promise<any> {
+    await this.initPool();
+    const conn = connection || await this.getConnection();
+    try {
+        const [result]: any = await conn.execute(sql, values);
+        if (!result.affectedRows) {
+            throw new Error("No se encontró el registro para eliminar.");
+        }
+        return result;
+    } catch (error) {
+        console.error('Error al ejecutar la eliminación:', error);
+        throw error;
+    } finally {
+        if (!connection) {
+            conn.release();
+        }
+    }
+}
+
+
 }

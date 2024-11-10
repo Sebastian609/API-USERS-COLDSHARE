@@ -26,6 +26,31 @@ class NeighborhoodService {
             throw error;
         }
     }
+
+    async create(neighborhood: NeighborhoodDTO): Promise<void> {
+        try {
+            await this.neighborhoodRepository.create(neighborhood);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async update(neighborhood: NeighborhoodDTO): Promise<void> {
+        try {
+            await this.neighborhoodRepository.update(neighborhood);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async delete(id: number): Promise<void> {
+        try {
+            await this.neighborhoodRepository.delete(id);
+        } catch (error) {
+            throw error;
+        }
+    }
+    
 }
 
 export default NeighborhoodService;
