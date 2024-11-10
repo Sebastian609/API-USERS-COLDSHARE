@@ -1,8 +1,7 @@
 export const createUserQuery = `
-
 INSERT INTO tbl_usuarios
-(vecindario_id, rol_id, nombre, dni, estado, fecha_creacion)
-VALUES (?, ?, ?, ?, ?, ?);
+(vecindario_id, rol_id, nombre, dni, password)
+VALUES (?, ?, ?, ?, ?);
 `;
 
 export const authUserQuery = `
@@ -20,7 +19,12 @@ WHERE dni = ? AND estado = 1;
 
 export const updateUserQuery = `
 UPDATE tbl_usuarios
-SET vecindario_id = ?, rol_id = ?, nombre = ?, dni = ?, estado = ?
+SET estado = ?
+WHERE usuario_id = ?;
+`;
+
+export const deleteUserQuery = `
+DELETE FROM tbl_usuarios
 WHERE usuario_id = ?;
 `;
 

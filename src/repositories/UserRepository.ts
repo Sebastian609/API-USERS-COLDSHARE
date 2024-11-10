@@ -1,7 +1,7 @@
 import { Database } from "../Database";
 import { UserDTO } from "../models/UserDTO";
-import {getAllUsersQuery, findUserQuery, auth} from "../queries/UserQueries";
-import {LoginDto} from "../models/LoginDto";
+import { getAllUsersQuery, findUserQuery, auth, deleteUserQuery, updateUserQuery, createUserQuery } from "../queries/UserQueries";
+import { LoginDto } from "../models/LoginDto";
 
 export class UserRepository {
   async getAll(): Promise<UserDTO[]> {
@@ -29,6 +29,36 @@ export class UserRepository {
       return result[0] as UserDTO;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async create(user: UserDTO): Promise<void> {
+    try {
+      await Database.executeInsert(createUserQuery, [
+        user.vecindarioId,
+        user.rolId,
+        user.nombre,
+        user.dni,
+        "000000" 
+      ]);
+    } catch (error) {
+      throw new Error(`Error al crear usuario: ${error.message}`);
+    }
+  }
+
+  async updateStatus(id: number, estado: number): Promise<void> {
+    try {
+      await Database.executeInsert(updateUserQuery, [estado, id]);
+    } catch (error) {
+      throw new Error(`Error al actualizar el estado del usuario: ${error.message}`);
+    }
+  }  
+
+  async delete (id: number): Promise<void> {
+    try {
+      await Database.executeDelete(deleteUserQuery, [id]);
+    } catch (error) {
+      throw new Error(`Error al eliminar el usuario: ${error.message}`);
     }
   }
 
