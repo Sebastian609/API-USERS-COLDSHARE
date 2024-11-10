@@ -1,6 +1,6 @@
 import { UserDTO } from "../models/UserDTO";  // Asegúrate de importar UserDTO
 import { UserRepository } from "../repositories/UserRepository";
-import {LoginDto} from "../models/LoginDto";
+import { LoginDto } from "../models/LoginDto";
 
 class UserService {
   private userRepository: UserRepository;
@@ -27,24 +27,29 @@ class UserService {
     }
   }
 
-  /*async save(user: UserDTO): Promise<boolean> {  // Descomenta y usa UserDTO en lugar de User
+  async create(user: UserDTO): Promise<void> {
     try {
-      const response = await this.userRepository.save(user);
-      return response;
+      await this.userRepository.create(user);
     } catch (error) {
       throw error;
     }
   }
 
-  async update(user: UserDTO): Promise<boolean> {  // Lo mismo para el update
+  async updateStatus(id: number, estado: number): Promise<void> {
     try {
-      const response = await this.userRepository.update(user);
-      return response;
+      await this.userRepository.updateStatus(id, estado);
     } catch (error) {
       throw error;
     }
-  }*/
+  }  
 
+  async delete(id: number): Promise<void> {
+    try {
+      await this.userRepository.delete(id);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async auth(login: LoginDto): Promise<UserDTO> {  // Lo mismo para el update
     try {

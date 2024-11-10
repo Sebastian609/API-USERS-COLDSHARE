@@ -6,7 +6,6 @@ import router from './routes/user.routes';
 import routerreports from './routes/Reports.routes';
 import routercomments from './routes/Comentarios.routes';
 
-
 const app = express();
 
 app.use(cors());
