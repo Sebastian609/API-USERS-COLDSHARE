@@ -8,7 +8,7 @@ export class StreaksController {
   constructor() {
     this.streaksService = new StreaksService();
   }
-
+//holaaa
   // Método para actualizar la racha de un usuario
   async updateStreak(req: Request, res: Response): Promise<Response> {
     const userId = req.body.userId as number;
